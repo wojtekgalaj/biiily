@@ -1,0 +1,256 @@
+@import 'nib'
+
+global-reset()
+
+*, *:after, *:before
+  box-sizing border-box
+  // TODO: Review
+  // This keeps the default cursor on all elemnts
+  // so it will not switch to that annoying text selection
+  // cursor. Not sure if its a good idea.
+  cursor default
+
+
+c_label = #aaa
+c_button = #555
+c_button_brdr = #aaa
+c_button_text = white
+c_strong = #555
+c_light = #eee
+c_nav_bg = #eee
+c_nav_el = #ee3
+
+
+// Layout
+.inner
+  margin auto
+  width 960px
+
+.hidden
+  display none
+
+.outahere
+  position absolute
+  top -999999px
+  left -999999px
+
+header
+  background c_strong
+  padding-bottom 20px
+  .logo
+    padding 10px 0 5px 0
+    font-size 90px
+    color white
+  .tagline
+    color c_light
+    margin-bottom 20px
+
+footer
+  background c_strong
+  color white
+  padding 40px 0 100px
+
+[data-link]
+  cursor pointer
+
+nav
+  background c_nav_bg
+  margin-bottom 20px
+  li
+    display inline-block
+    margin-right 3px
+    padding 10px
+    background c_nav_el
+    &.search
+      background none
+      float right
+      padding 6px
+      input
+        font-size 24px
+
+.login
+  position absolute
+  top 10px
+  right 25px
+  background #aaa
+  padding 10px
+  border-radius 3px
+
+#main_content
+  padding-top 10px
+  overflow hidden
+
+.minmax
+  padding 10px 0
+
+
+// Typography
+body
+  font-family Georgia
+
+h1
+  font-size 23px
+  margin 5px 0 15px 0
+
+i
+  font-family 'FontAwesome'
+
+// Forms
+label
+  display block
+  color c_label
+  font-size 12px
+  padding 3px 0 5px
+  input, textarea
+    display block
+    width 100%
+    padding 8px
+    font-size 14px
+  p
+    padding-bottom 10px
+    margin-top 6px
+    border-bottom 1px solid c_button_brdr
+    font-size 14px
+    color black
+
+input.ok
+  background #bada55
+
+.btn, i
+  cursor pointer
+
+.btn
+  padding 6px 12px
+  border-radius 2px
+  background c_button
+  color c_button_text
+  display inline-block
+  margin-bottom 5px
+
+// All the content of an elemet with a class of inline will
+// be displayed inline-block
+.inline
+  *
+    display inline-block
+
+// Lists
+.view_switch, .minmax
+  display none
+ul.grid
+  li:not(.view_switch)
+    position relative
+    display inline-block
+    padding 20px
+    background #eee
+    width 33%
+    margin-bottom 5px
+  dl
+    margin 10px 0
+    dt, dd
+      display inline-block
+    dd
+      margin-right 15px
+
+  small, dt
+    font-size 75%
+    font-family 'Lucida Grande'
+    color #aaa
+  small
+    display block
+    padding-bottom 10px
+  p
+    margin-bottom 10px
+  .controls
+    opacity 0
+    transition opacity .1s
+    position absolute
+    top 0
+    right 5px
+    padding 5px
+    background white
+  li:hover
+    .controls
+      opacity 100
+  li.proposal:before
+    content 'PROPOSAL'
+    color white
+    width 100px
+    padding 4px 0
+    position absolute
+    top 30px
+    right -10px
+    text-align center
+    transform:rotate(45deg)
+    background red
+    display block
+
+// tables
+table
+  width 100%
+  th
+    border-bottom 1px solid #aaa
+  td, th
+    padding 5px
+    width 12.5%
+    &:first-child
+      width 70%
+    &:last-child
+      width 5%
+  .controls
+    .btn
+      float right
+      &.make_invoice
+        background #bada55
+        float left
+
+// Clients
+.clients
+  .name
+    font-size 150%
+
+.client_detail, .doc_details
+  width 60%
+  margin 30px auto
+  .name, .client
+    font-size 90px
+
+
+
+// Documents
+.new_document
+  .tasks
+    form
+      margin 20px 0
+    label
+      display inline-block
+      width 15%
+      input
+        width 100%
+    label[for="task"]
+      width 65%
+
+
+.newTask
+  padding-top 100px
+
+.totals.header
+  td
+    border-bottom 1px solid black
+    span
+      display block
+      padding-top 30px
+
+.tasks
+  i
+    display inline-block
+    opacity 0
+    transition opacity .1s
+  tr:hover, tr.controls
+    i
+      opacity 100
+
+
+
+.document_detail.invoice
+  background c_light
+  padding 10px

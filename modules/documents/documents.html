@@ -1,0 +1,177 @@
+<template name="documents">
+  <div class="minmax"><i class="icon-eye-open"></i> Toggle documents visibility</div>
+  <div class="documents">
+    <h1>Documents</h1>
+    <nav>
+      <ul>
+        <li>
+          <span role="link" data-link="document/new">New document</span>
+        </li>
+      </ul>
+    </nav>
+    <ul class="documents grid">
+      {{#each documents}}
+        {{> document}}
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="document">
+  <li {{#unless isInvoice}}class="proposal"{{/unless}}>
+    <div class="info">
+      <small>#:</small>
+      <p class="number">{{number}}</p>
+      <small>Title:</small>
+      <p class="name">{{title}}</p>
+      <small>Client:</small>
+      <p class="client">{{client}}</p>
+    </div>
+    <div class="controls">
+      <i class="icon-zoom-in details" title="Details"></i>
+      <i class="icon-trash remove" title="Remove"></i>
+    </div>
+  </li>
+</template>
+
+<template name="new_document">
+  <div class="detailsScreen">
+    <h1>New document</h1>
+    <div class="new_document">
+      <div class="description">
+        <label for="client">
+          Client
+          <input type="text" id="client" name="client" {{#if currentClient}}value="{{currentClient}}"{{/if}}/>
+        </label>
+        <label for="title">
+          Title
+          <input type="text" id="title" name="title" />
+        </label>
+        <label for="description">
+          Description
+          <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        </label>
+      </div>
+    </div>
+    <div class="description">
+      <p>Fill in the header info first. You will then be taken to the details page where you can specify the concepts for the invoice and track all comunnications with the client.</p>
+    </div>
+  </div>
+  <div class="btn add">
+    <i class="icon-ok"></i>
+    Accept
+  </div>
+</template>
+
+<template name="new_doc_concept">
+  <tr>
+    <td class="task">{{concept.task}}</td>
+    <td class="quantity">{{concept.quantity}}</td>
+    <td class="price">{{concept.price}}</td>
+  </tr>
+</template>
+
+<template name="document_detail">
+  {{#with current_document}}
+    <div class="document_detail {{#if isInvoice}}invoice{{/if}}">
+      <h1>
+        {{#if isInvoice}}
+          Invoice
+        {{else}}
+          Proposal
+        {{/if}}
+        Details
+      </h1>
+      <div class="doc_details">
+        <label for="client">
+          Client
+          <p class="client">{{client}}</p>
+        </label>
+        <label for="number">
+          Number
+          <p class="number">{{number}}</p>
+        </label>
+        <label for="title">
+          Title
+          <p class="email">{{title}}</p>
+        </label>
+      </div>
+      <div class="tasks">
+        <table>
+          <tr>
+            <th>Task</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+          {{#each concepts}}
+            {{> template_concept}}
+          {{/each}}
+          <tr class="totals header">
+            <td></td>
+            <td class="tax"><span>Tax</span></td>
+            <td class="total"><span>Total</span></td>
+            <td class="controls"></td>
+          </tr>
+          <tr class="totalsrow">
+            <td></td>
+            <td class="tax"></td>
+            <td class="total">{{documentTotal}}</td>
+            <td class="controls"></td>
+          </tr>
+        </table>
+        <table class="newTask">
+          <tr>
+            <th>Taks</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+          <tr>
+            <td>
+              <label for="task">
+                <input type="text" id="task" name="task" />
+              </label>
+            </td>
+            <td>
+              <label for="quantity">
+                <input type="text" id="quantity" name="quantity" />
+              </label>
+            </td>
+            <td>
+              <label for="price">
+                <input type="text" id="price" name="price" />
+              </label>
+            </td>
+            <td></td>
+          </tr>
+          <tr class="controls">
+            <td colspan="4">
+              <div class="btn add_concept">
+                <i class="icon-check"></i>
+                Add
+              </div>
+              {{#unless isInvoice}}
+                <div class="btn make_invoice">
+                  <i class="icon-check"></i>
+                  Promote to invoice
+                </div>
+              {{/unless}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  {{/with}}
+</template>
+
+<template name="template_concept">
+  <tr class="taskrow">
+    <td class="task">{{task}}</td>
+    <td class="quantity">{{quantity}}</td>
+    <td class="price">{{price}}</td>
+    <td>
+      <i class="remove_concept icon-remove"></i>
+      <i class="edit_concept icon-pencil"></i>
+    </td>
+  </tr>
+</template>

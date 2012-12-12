@@ -1,0 +1,44 @@
+<head>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" >
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+  <title>biiily</title>
+</head>
+
+<body>
+  <header>
+    <div class="inner">
+      <div class="logo">Biiily</div>
+      <div class="tagline">Billing for freelancers.</div>
+      <nav>
+        <div class="inner">
+          <ul>
+            <li>
+              <span data-link="/">Dashboard</span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="login">
+        {{loginButtons}}
+      </div>
+    </div>
+  </header>
+  <div id="main_content">
+    <div class="inner" id="main_container">
+      <!-- This is where the templates get rendered -->
+    </div>
+  </div>
+  <footer>
+    <div class="inner">
+      ©copyright ME 2012.
+    </div>
+  </footer>
+</body>
+
+<template name="dashboard">
+  <div class="dashboard">
+    {{> clients}}
+    {{> documents}}
+  </div>
+</template>
+

@@ -38,7 +38,7 @@
   <div class="detailsScreen">
     <h1>New document</h1>
     <div class="new_document">
-      <div class="description">
+      <div class="details">
         <label for="client">
           Client
           <input type="text" id="client" name="client" {{#if currentClient}}value="{{currentClient}}"{{/if}}/>
@@ -51,15 +51,16 @@
           Description
           <textarea name="description" id="description" cols="30" rows="10"></textarea>
         </label>
+        <div class="btn add">
+          <i class="icon-ok"></i>
+          Accept
+        </div>
+      </div>
+      <div class="helpText">
+        <p>Fill in the header info first. You will then be taken to the details page where you can specify the concepts for the invoice and track all comunnications with the client.</p>
       </div>
     </div>
-    <div class="description">
-      <p>Fill in the header info first. You will then be taken to the details page where you can specify the concepts for the invoice and track all comunnications with the client.</p>
-    </div>
-  </div>
-  <div class="btn add">
-    <i class="icon-ok"></i>
-    Accept
+
   </div>
 </template>
 

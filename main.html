@@ -15,6 +15,12 @@
             <li>
               <span data-link="/">Dashboard</span>
             </li>
+            <li>
+              <span data-link="clients">Clients</span>
+            </li>
+            <li>
+              <span data-link="documents">Documents</span>
+            </li>
           </ul>
         </div>
       </nav>
@@ -37,6 +43,8 @@
 
 <template name="dashboard">
   <div class="dashboard">
+    <h1>Dashboard</h1>
+    <hr>
     {{> clients}}
     {{> documents}}
   </div>

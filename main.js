@@ -26,12 +26,22 @@ if (Meteor.isClient) {
     routes: {
       '/' : 'dashboard',
       '' : 'dashboard',
+      'clients' : 'clients',
       'client/:name' : 'client',
+      'documents' : 'documents',
       'document/:id' : 'document'
     },
 
     dashboard: function () {
       render('dashboard');
+    },
+
+    clients: function () {
+      render('clients');
+    },
+
+    documents: function(){
+      render('documents');
     },
 
     client: function (name) {

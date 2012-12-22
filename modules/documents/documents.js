@@ -133,6 +133,7 @@ if (Meteor.isClient) {
     scope = $(scope.currentTarget).is('.btn') ? this : scope;
 
     function formIsValid() {
+      // TODO: Validate the concept bit
       return true;
     }
 
@@ -146,11 +147,16 @@ if (Meteor.isClient) {
   }
 
   Template.document_detail.events = {
-    // Add a new concept to the document
     'click .add_concept' : addConcept,
+
     'click .make_invoice': function () {
       BC.Documents.update(this._id, {$set: {isInvoice: true}});
     },
+
+    'click .make_proposal': function () {
+      BC.Documents.update(this._id, {$set: {isInvoice: false}});
+    },
+
     'keydown' : function (e) {
       // If ENTER was pressed add concept
       if (e.keyCode === 13) {
@@ -165,9 +171,6 @@ if (Meteor.isClient) {
       BC.Documents.update({concepts: this}, {$pull: {concepts: this}});
     }
   }
-
-
-
 }
 
 if (Meteor.isServer) {

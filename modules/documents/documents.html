@@ -151,12 +151,17 @@
                 <i class="icon-check"></i>
                 Add
               </div>
-              {{#unless isInvoice}}
+              {{#if isInvoice}}
+                <div class="btn make_proposal">
+                  <i class="icon-check"></i>
+                  Back to proposal
+                </div>
+              {{else}}
                 <div class="btn make_invoice">
                   <i class="icon-check"></i>
                   Promote to invoice
                 </div>
-              {{/unless}}
+              {{/if}}
             </td>
           </tr>
         </table>

@@ -121,50 +121,62 @@
             <td class="controls"></td>
           </tr>
         </table>
-        <table class="newTask">
-          <tr>
-            <th>Taks</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr>
-          <tr>
-            <td>
-              <label for="task">
-                <input type="text" id="task" name="task" />
-              </label>
-            </td>
-            <td>
-              <label for="quantity">
-                <input type="text" id="quantity" name="quantity" />
-              </label>
-            </td>
-            <td>
-              <label for="price">
-                <input type="text" id="price" name="price" />
-              </label>
-            </td>
-            <td></td>
-          </tr>
-          <tr class="controls">
-            <td colspan="4">
-              <div class="btn add_concept">
-                <i class="icon-check"></i>
-                Add
-              </div>
-              {{#if isInvoice}}
-                <div class="btn make_proposal">
+        {{#unless isInvoice}}
+          <table class="newTask">
+            <tr>
+              <th>Taks</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+            <tr>
+              <td>
+                <label for="task">
+                  <input type="text" id="task" name="task" />
+                </label>
+              </td>
+              <td>
+                <label for="quantity">
+                  <input type="text" id="quantity" name="quantity" />
+                </label>
+              </td>
+              <td>
+                <label for="price">
+                  <input type="text" id="price" name="price" />
+                </label>
+              </td>
+              <td></td>
+            </tr>
+            <tr class="controls">
+              <td colspan="4">
+                <div class="btn add_concept">
                   <i class="icon-check"></i>
-                  Back to proposal
+                  Add
                 </div>
-              {{else}}
-                <div class="btn make_invoice">
-                  <i class="icon-check"></i>
-                  Promote to invoice
-                </div>
-              {{/if}}
-            </td>
-          </tr>
-        </table>
+              </td>
+            </tr>
+          </table>
+        {{/unless}}
+      </div>
+      <div class="invoiceToPorposal">
+        {{#if isInvoice}}
+          <div class="btn make_proposal">
+            <i class="icon-check"></i>
+            Back to proposal
+          </div>
+        {{else}}
+          <div class="btn make_invoice">
+            <i class="icon-check"></i>
+            Promote to invoice
+          </div>
+        {{/if}}
+      </div>
+      <div class="status">
+        {{#if isInvoice}}
+          <dl>
+            <dt>Status</dt><dd>{{paymentStatus}}</dd>
+            <dt>Comments</dt><dd>{{comments}}</dd>
+          </dl>
+        {{/if}}
       </div>
     </div>
   {{/with}}

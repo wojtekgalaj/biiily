@@ -97,24 +97,50 @@ if (Meteor.isClient) {
     }
   };
 
+  function getCid () {
+    return Session.get('current_document_id');
+  }
+
   Template.document_detail.helpers({
     current_document: function () {
-      var _id = Session.get('current_document_id');
-
-      return BC.Documents.findOne({_id: _id});
+      var cid = getCid();
+      return BC.Documents.findOne({_id: cid});
     },
 
     documentTotal: function () {
-      var
-        concepts = this.concepts,
-        total = 0;
+      var cid = getCid(),
+        currentDoc = BC.Documents.findOne({_id: cid});
 
-      _.each(concepts, function (concept, index) {
-        total += parseFloat(concept.price);
-      });
-      return total;
+      if (!currentDoc) return;
+      return BC.Documents.findOne(cid).total;
+
+      // var
+      //   concepts = this.concepts,
+      //   total = 0;
+
+      // _.each(concepts, function (concept, index) {
+      //   total += parseFloat(concept.price);
+      // });
+      // return total;
+    },
+
+    paymentStatus: function () {
+      var
+        cid = getCid(),
+        currentDoc = BC.Documents.findOne({_id: cid}),
+        totalToPay = currentDoc.total,
+        amountPaid = currentDoc.amountPaid;
+
+      if (!currentDoc) return;
+      if (!amountPaid) {
+        return 'Unpaid';
+      } else if (amountPaid < totalToPay) {
+        return 'Partially paid'
+      } else {
+        return 'Paid in full'
+      }
     }
-  });
+  }); 
 
 
 
@@ -123,6 +149,7 @@ if (Meteor.isClient) {
       task = $('#task').val(),
       quantity = $('#quantity').val(),
       price = $('#price').val(),
+      total,
       newConcept = {
         task: task,
         quantity: quantity,
@@ -132,15 +159,21 @@ if (Meteor.isClient) {
     // On keydown scope is set to this, so we know what doc is referenced
     scope = $(scope.currentTarget).is('.btn') ? this : scope;
 
+    total = BC.Documents.findOne(scope._id).total || 0;
+    total += parseFloat(price);
+
     function formIsValid() {
       // TODO: Validate the concept bit
       return true;
     }
-
+    // TODO:  total on the object by the value of newConcept.price
     if (formIsValid()) {
       BC.Documents.update(
         scope._id,
-        {$addToSet: {concepts: newConcept}}
+        {
+          $addToSet: {concepts: newConcept},
+          $set: {total: total}
+        }
       );
       $('#task').val('').focus();
     }
@@ -168,7 +201,21 @@ if (Meteor.isClient) {
 
   Template.template_concept.events = {
     'click .remove_concept' : function () {
-      BC.Documents.update({concepts: this}, {$pull: {concepts: this}});
+      var 
+        cid = getCid(),
+        concepts,
+        total = 0;
+
+      BC.Documents.update(cid, 
+        {$pull: {concepts: this}}
+      );
+      concepts = BC.Documents.findOne({_id: cid}).concepts,
+      _.each(concepts, function (concept) {
+        total += parseFloat(concept.price);
+      });
+      BC.Documents.update(cid, 
+        {$set: {total: total}}
+      );
     }
   }
 }

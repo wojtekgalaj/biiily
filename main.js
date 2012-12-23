@@ -72,6 +72,7 @@ if (Meteor.isClient) {
   }
 
   Template.dashboard.rendered = function () {
+    console.log('template dashboard rendered');
     Session.set('current_client_name', false);
   };
 

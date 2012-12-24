@@ -54,11 +54,11 @@ if (Meteor.isClient) {
     },
 
     document: function (_id) {
-      if (_id === 'new') {
-        render('new_document');
-      } else {
+      if (_id !== 'new') {
         Session.set('current_document_id', _id);
         render('document_detail');
+      } else {
+        render('new_document');
       }
     }
   });

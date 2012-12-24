@@ -64,7 +64,10 @@ if (Meteor.isClient) {
         matchedNames = [];
 
       // This should be an implementation of a predictive input
-      matches = BC.Clients.find({name: {$regex : currentValue}}).fetch();
+      matches = BC.Clients.find({name: {
+        $regex : currentValue,
+        $options: 'i'
+      }}).fetch();
 
       matches.forEach(function (match, index) {
         matchedNames.push(match.name);
@@ -113,15 +116,6 @@ if (Meteor.isClient) {
 
       if (!currentDoc) return;
       return BC.Documents.findOne(cid).total;
-
-      // var
-      //   concepts = this.concepts,
-      //   total = 0;
-
-      // _.each(concepts, function (concept, index) {
-      //   total += parseFloat(concept.price);
-      // });
-      // return total;
     },
 
     paymentStatus: function () {

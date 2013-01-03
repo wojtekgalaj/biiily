@@ -65,12 +65,6 @@ if (Meteor.isClient) {
 
   var app_router = new AppRouter();
 
-  Template.dashboard.events = {
-    'click .minmax' : function (ev) {
-      $(ev.currentTarget).next().stop().slideToggle();
-    }
-  }
-
   Template.dashboard.rendered = function () {
     Session.set('current_client_name', false);
   };

@@ -49,6 +49,7 @@ footer
   background c_strong
   color white
   padding 40px 0 100px
+  margin-top 60px
 
 [data-link]
   cursor pointer
@@ -66,7 +67,17 @@ nav
       float right
       padding 6px
       input
-        font-size 24px
+        font-size 11px
+
+// Font awesome icon element
+i
+  padding 0 10px 0 0
+  line-height 1em
+
+.help
+  padding 20px
+  margin 20px 0
+  background #eee
 
 div#login-dropdown-list
   top -5px
@@ -83,9 +94,6 @@ div#login-dropdown-list
 #main_content
   padding-top 10px
   overflow hidden
-
-.minmax
-  padding 10px 0
 
 
 // Typography
@@ -137,9 +145,8 @@ input.ok
   *
     display inline-block
 
+
 // Lists
-.view_switch, .minmax
-  display none
 ul.grid
   li:not(.view_switch)
     position relative
@@ -212,34 +219,36 @@ table
   .name
     font-size 150%
 
-.client_detail, .doc_details
-  width 60%
+.client_detail, .document_detail
+  width 75%
   margin 30px auto
   .name, .client
     font-size 90px
 
+.new_client, .new_document
+  width 75%
+  margin auto
+  label
+    margin 10px 0 20px
+    font-size 20px
+    input
+      font-size 20px
+      margin-top 5px
+      padding 10px
+
+
 
 
 // Documents
-.new_document
-  .details
-    width 70%
-    float left
-  .helpText
-    width 30%
-    float left
-    padding-left 20px
-    line-height 1.4em
-  .tasks
-    form
-      margin 20px 0
-    label
-      display inline-block
-      width 15%
-      input
-        width 100%
-    label[for="task"]
-      width 65%
+.tasks
+  form
+    margin 20px 0
+  label
+    display inline-block
+    input
+      width 100%
+  label[for="task"]
+    width 100%
 
 
 .newTask

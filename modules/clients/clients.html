@@ -1,5 +1,4 @@
 <template name="clients">
-  <div class="minmax"><i class="icon-eye-open"></i> Toggle clients visibility</div>
   <div class="clients">
     <h1>Clients</h1>
     <nav>
@@ -8,7 +7,7 @@
           <span role="link" data-link="client/new">New client</span>
         </li>
         <li class="search">
-          <input type="search" id="searchClients" placeholder="Filter Clients">
+          <input type="text" id="searchClients" placeholder="Filter Clients">
         </li>
       </ul>
     </nav>
@@ -43,7 +42,9 @@
 
 <template name="new_client">
   <div class="new_client">
-    <p class="help">Add the information for your new client. Congratulations!</p>
+    <div class="help">
+      <p>Add the information for your new client. Congratulations!</p>
+    </div>
     <label for="name">
       Name
       <input type="text" id="name" name="name" {{#if nameToCreate}} value="{{nameToCreate}} {{/if}}"/>
@@ -71,6 +72,7 @@
   {{#with current_client}}
     <div class="client_detail">
       <h1>Client Details</h1>
+      <button id="edit">Edit</button>
       <label for="name">
         Name
         <p class="name">{{name}}</p>

@@ -25,6 +25,7 @@ if (Meteor.isClient) {
 
 
   Template.new_client.nameToCreate = function () {
+    console.log('nameToCreate');
     return Session.get('clientNameToCreate');
   };
 
@@ -60,10 +61,12 @@ if (Meteor.isClient) {
     },
 
     numberOfProposals: function () {
+      console.log('numberOfProposals')
       return BC.Documents.find({client: this.name, isInvoice: {$ne: true}}).count();
     },
 
     numberOfInvoices: function () {
+      console.log('numberOfInvoices')
       return BC.Documents.find({client: this.name, isInvoice: true}).count();
     }
   })

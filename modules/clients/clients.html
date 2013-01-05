@@ -45,22 +45,7 @@
     <div class="help">
       <p>Add the information for your new client. Congratulations!</p>
     </div>
-    <label for="name">
-      Name
-      <input type="text" id="name" name="name" {{#if nameToCreate}} value="{{nameToCreate}} {{/if}}"/>
-    </label>
-    <label for="email">
-      Email
-      <input type="text" id="email" name="email" />
-    </label>
-    <label for="tel">
-      Telephone
-      <input type="text" id="tel" name="tel" />
-    </label>
-    <label for="address">
-      Address
-      <textarea type="text" id="address" name="address" />
-    </label>
+    {{>client_detail_form}}
     <div class="btn add">
       <i class="icon-ok"></i>
       Accept
@@ -68,11 +53,64 @@
   </div>
 </template>
 
+<template name="edit_client">
+  <div class="edit_client">
+    <div class="help">
+      <p>Edit the information for this client.</p>
+    </div>
+    {{>client_detail_form}}
+    <div class="btn update">
+      <i class="icon-ok"></i>
+      Update
+    </div>
+  </div>
+</template>
+
+<template name="client_detail_form">
+  <label for="name">
+    Name
+    <input type="text" id="name" name="name"
+      {{#if nameToCreate}}
+        value="{{nameToCreate}}"
+      {{else}}
+        {{#if clientToEdit}}
+          value="{{clientToEdit.name}}"
+        {{/if}}
+      {{/if}}
+    />
+  </label>
+  <label for="email">
+    Email
+    <input type="text" id="email" name="email"
+      {{#if clientToEdit}}
+        value="{{clientToEdit.email}}"
+      {{/if}}
+    />
+  </label>
+  <label for="tel">
+    Telephone
+    <input type="text" id="tel" name="tel"
+      {{#if clientToEdit}}
+        value="{{clientToEdit.tel}}"
+      {{/if}}
+    />
+  </label>
+  <label for="address">
+    Address
+    <textarea type="text" id="address" name="address"
+      {{#if clientToEdit}}
+        value="{{clientToEdit.address}}"
+      {{/if}}
+    />
+  </label>
+
+</template>
+
 <template name="client_detail">
   {{#with current_client}}
     <div class="client_detail">
+      <button class="edit">Edit</button>
       <h1>Client Details</h1>
-      <button id="edit">Edit</button>
       <label for="name">
         Name
         <p class="name">{{name}}</p>

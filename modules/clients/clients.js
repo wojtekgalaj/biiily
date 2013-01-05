@@ -24,10 +24,14 @@ if (Meteor.isClient) {
   }
 
 
-  Template.new_client.nameToCreate = function () {
-    console.log('nameToCreate');
-    return Session.get('clientNameToCreate');
-  };
+  Template.client_detail_form.helpers({
+    nameToCreate: function () {
+      return Session.get('clientNameToCreate');
+    },
+    clientToEdit: function () {
+      return Session.get('clientToEdit');
+    }
+  });
 
   Template.new_client.events = {
     'click .add' : function () {
@@ -55,18 +59,23 @@ if (Meteor.isClient) {
     }
   };
 
+  Template.edit_client.events = {
+    'click .update' : function () {
+      console.log('updating');
+      // Code to update existing client data and render the details screen again
+    }
+  }
+
   Template.client.helpers({
     numberOfDocs: function () {
       return BC.Documents.find({client: this.name}).count();
     },
 
     numberOfProposals: function () {
-      console.log('numberOfProposals')
       return BC.Documents.find({client: this.name, isInvoice: {$ne: true}}).count();
     },
 
     numberOfInvoices: function () {
-      console.log('numberOfInvoices')
       return BC.Documents.find({client: this.name, isInvoice: true}).count();
     }
   })
@@ -87,13 +96,6 @@ if (Meteor.isClient) {
     'click .details' : function (e) {
       var name = this.name;
       navigate('client/' + name);
-    },
-
-    'keyup #searchClients' : function (e) {
-      if ($('#searchClients').val().length > 3) {
-        debugger;
-        render('clients');
-      }
     }
   };
 
@@ -106,12 +108,16 @@ if (Meteor.isClient) {
     current_client_docs: function () {
       var
         name = Session.get('current_client_name');
-      // Return only Docs with name of client
-      // I have to refactor all the Client code to search
-      // using name not _id
-      return BC.Documents.find({client: name}).fetch();
+      return BC.Documents.findOne({client: name});
     }
   });
+
+  Template.client_detail.events({
+    'click button.edit' : function () {
+      Session.set('clientToEdit', this);
+      navigate('/client/edit/' + this.name);
+    }
+  })
 }
 
 if (Meteor.isServer) {

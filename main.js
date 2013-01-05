@@ -28,6 +28,7 @@ if (Meteor.isClient) {
       '' : 'dashboard',
       'clients' : 'clients',
       'client/:name' : 'client',
+      'client/edit/:name' : 'clientEdit',
       'documents' : 'documents',
       'document/:id' : 'document'
     },
@@ -53,6 +54,10 @@ if (Meteor.isClient) {
       }
     },
 
+    clientEdit: function () {
+      render('edit_client');
+    },
+
     document: function (_id) {
       if (_id !== 'new') {
         Session.set('current_document_id', _id);
@@ -66,7 +71,6 @@ if (Meteor.isClient) {
   var app_router = new AppRouter();
 
   Template.dashboard.rendered = function () {
-    console.log('template dashboard rendered');
     Session.set('current_client_name', false);
   };
 

@@ -1,21 +1,26 @@
 <template name="clients">
   <div class="clients">
     <h1>Clients</h1>
-    <nav>
-      <ul>
-        <li>
-          <span role="link" data-link="client/new">New client</span>
-        </li>
-        <li class="search">
-          <input type="text" id="searchClients" placeholder="Filter Clients">
-        </li>
+    {{#if thereAreClients}}
+      <nav>
+        <ul>
+          <li>
+            <span role="link" data-link="client/new">New client</span>
+          </li>
+          <li class="search">
+            <input type="text" id="searchClients" placeholder="Filter Clients">
+          </li>
+        </ul>
+      </nav>
+      <ul class="clients grid">
+        {{#each clients}}
+          {{> client}}
+        {{/each}}
       </ul>
-    </nav>
-    <ul class="clients grid">
-      {{#each clients}}
-        {{> client}}
-      {{/each}}
-    </ul>
+    {{else}}
+      <p class="help">You have no clients yet. First thing to do is to make one.</p>
+      <div data-link="client/new" class="cta">Make Client</div>
+    {{/if}}
   </div>
 </template>
 

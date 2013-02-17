@@ -12,10 +12,11 @@ global-reset()
 
 
 c_label = #aaa
+c_header_bg = #555
 c_button = #555
 c_button_brdr = #aaa
 c_button_text = white
-c_strong = #555
+c_strong = #941222
 c_light = #ccc
 c_nav_bg = #ddd
 c_nav_el = #ee3
@@ -35,7 +36,7 @@ c_nav_el = #ee3
   left -999999px
 
 header
-  background c_strong
+  background c_header_bg
   padding-bottom 20px
   .logo
     padding 10px 0 5px 0
@@ -46,7 +47,7 @@ header
     margin-bottom 20px
 
 footer
-  background c_strong
+  background c_header_bg
   color white
   padding 40px 0 100px
   margin-top 60px
@@ -131,6 +132,7 @@ input.ok
 .btn, i
   cursor pointer
 
+// Buttons
 .btn
   padding 6px 12px
   border-radius 2px
@@ -138,6 +140,17 @@ input.ok
   color c_button_text
   display inline-block
   margin-bottom 5px
+
+.cta
+  @extend .btn
+  font-size 2em
+  background c_strong
+  color white
+  margin 20px auto
+  display block
+  width 60%
+  text-align center
+
 
 // All the content of an elemet with a class of inline will
 // be displayed inline-block
@@ -221,6 +234,7 @@ table
 .clients
   .name
     font-size 150%
+
 
 .client_detail, .document_detail
   width 75%
